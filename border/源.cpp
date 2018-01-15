@@ -80,10 +80,10 @@ int main(int argc, char *argv[])
 	//计算旋转后的大小，扩充旋转
 	cv::Point2f center(image.cols / 2.0f, image.rows / 2.0f);
 	cv::Mat rot = cv::getRotationMatrix2D(center, angle, 1);
-	cv::Rect bbox = cv::RotatedRect(center, image.size(), angle).boundingRect();
+	cv::Rect bbox = cv::RotatedRect(center, image.size(), angle).boundingRect();//返回外部矩形边界
 	//中心旋转
 	rot.at<double>(0, 2) += bbox.width / 2.0 - center.x;
-	rot.at<double>(1, 2) += bbox.height / 2.0 - center.y;
+	rot.at<double>(1, 2) += bbox.height / 2.0 - center.y;//中心重新映射
 	
 	Mat imageRotate;
 	Mat imageGrayRotate;
@@ -123,7 +123,7 @@ int main(int argc, char *argv[])
 			{
 				//判断是否在已经找到的条形码内
 				int xCurent = rect.tl().x;
-				int yCenter = rect.tl().y + rect.height;
+				int yCenter = rect.tl().y + rect.height/2;
 				int rectI;
 				for (rectI = 0; rectI < rectVector.size();rectI++)
 				{

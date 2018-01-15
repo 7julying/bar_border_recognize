@@ -92,7 +92,7 @@ MatND myCalcHist(Mat imageGray, int isShow)
 	int channels = 0;
 	MatND dstHist;
 	int histSize[] = { 256 };
-	float midRanges[] = { 0,256 };
+	float midRanges[] = { 0,255 };
 	const float *ranges[] = { midRanges };
 	calcHist(&imageGray, 1, &channels, Mat(), dstHist, 1, histSize, ranges, true, false);
 
